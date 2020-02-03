@@ -61,22 +61,14 @@ end
 
 #This part filters for tweets with the specified hashtags and likes them.
 x=0
-topics = ['#insomnia', '#mentalhealth', '#depression', '#DomesticViolence']
+topics = ['#insomnia', '#mentalhealth', '#depression',  '#ask', '#ADD', '#ADHD',]
 sClient.filter(:track => topics.join(',')) do |tweet|
     if tweet.is_a?(Twitter::Tweet)
-      
+      if x %3 ==0 
+	    client.retweet tweet
+      end
       client.fav tweet
 	  x = x+1
       puts "Huduma bot has liked #{x} tweets" #to check if the tweet function is working.
-    end
-end
-
-topics = ['#insomnia', '#ask' '#ADD', '#ADHD', '#depression', '#mentalhealth']
-sClient.filter(:track => topics.join(',')) do |tweet|
-    if tweet.is_a?(Twitter::Tweet)
-      
-      client.retweet tweet
-	  x = x+1
-      puts "Huduma bot has retweeted #{x} tweets" #to check if the retweet is working
     end
 end
